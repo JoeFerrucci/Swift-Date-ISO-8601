@@ -28,9 +28,10 @@
 import Foundation
 
 public extension NSDate {
-    public class func ISOStringFromDate(date: NSDate) -> String {
+    public class func ISOStringFromDate(date: NSDate, locale: String = "en_US_POSIX", timezone: String = "UTC") -> String {
         let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone(abbreviation: "UTC")
+        dateFormatter.locale = NSLocale(localeIdentifier: locale)
+        dateFormatter.timeZone = NSTimeZone(abbreviation: timezone)
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
         
         /*
@@ -40,51 +41,11 @@ public extension NSDate {
         return dateFormatter.stringFromDate(date).stringByAppendingString("Z")
     }
     
-    public class func dateFromISOString(string: String) -> NSDate? {
+    public class func dateFromISOString(string: String, locale: String = "en_US_POSIX") -> NSDate? {
         let dateFormatter = NSDateFormatter()
         dateFormatter.timeZone = NSTimeZone.localTimeZone()
         dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         
         return dateFormatter.dateFromString(string)
     }
-    
-    // Locale
-    public class func ISOStringFromDate(date: NSDate, locale: String) -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.locale = NSLocale(localeIdentifier: locale)
-        dateFormatter.timeZone = NSTimeZone(abbreviation: "UTC")
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
-        
-        return dateFormatter.stringFromDate(date).stringByAppendingString("Z")
-    }
-    
-    // Locale
-    public class func dateFromISOString(string: String, locale: String) -> NSDate? {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.locale = NSLocale(localeIdentifier: locale)
-        dateFormatter.timeZone = NSTimeZone.localTimeZone()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
-        
-        return dateFormatter.dateFromString(string)
-    }
-    
-    // Timezone
-    public class func ISOStringFromDate(date: NSDate, timezone: String) -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.timeZone = NSTimeZone(abbreviation: timezone)
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
-        
-        return dateFormatter.stringFromDate(date).stringByAppendingString("Z")
-    }
-    
-    // Locale and Timezone
-    public class func ISOStringFromDate(date: NSDate, locale: String, timezone: String) -> String {
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.locale = NSLocale(localeIdentifier: locale)
-        dateFormatter.timeZone = NSTimeZone(abbreviation: timezone)
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSS"
-        
-        return dateFormatter.stringFromDate(date).stringByAppendingString("Z")
-    }
-    
 }
