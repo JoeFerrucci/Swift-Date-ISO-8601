@@ -48,4 +48,8 @@ public extension NSDate {
         
         return dateFormatter.dateFromString(string)
     }
+    
+    public class func isoStringNow() -> String {
+        return NSDate.ISOStringFromDate(NSDate())
+    }
 }
